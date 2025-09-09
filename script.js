@@ -302,7 +302,7 @@ $('#clear').addEventListener('click', ()=>{ $('#q').value=''; filter=''; render(
     companies = [];
   }
   render();
-  bootConfetti();
+  
   setupPWA();
   setupModal();
 })();
@@ -312,10 +312,13 @@ $('#clear').addEventListener('click', ()=>{ $('#q').value=''; filter=''; render(
 // ==============================
 let fx, ctx, fxW=0, fxH=0, rafId=0, particles=[];
 function bootConfetti(){
-  //fx = $('#fx'); ctx = fx.getContext('2d', { alpha:true });
-  //resizeFx();
-  //window.addEventListener('resize', resizeFx);
+  fx = $('#fx'); ctx = fx.getContext('2d', { alpha:true });
+  resizeFx();
+  window.addEventListener('resize', resizeFx);
 }
+
+bootConfetti();
+
 function resizeFx(){
   fxW = fx.width = Math.floor(window.innerWidth  * devicePixelRatio);
   fxH = fx.height= Math.floor((window.innerHeight)* devicePixelRatio);
