@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <title>MTS Link · Лид-трекер конференции</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#E30611" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Лид-трекер" />
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="appbar">
+    <div class="row">
+      <div class="logo" aria-hidden="true">🤝</div>
+      <div>
+        <h1>MTS Link · Лид-трекер</h1>
+        <div class="subtitle">Просмотр инсайтов • офлайн • мобильный</div>
+      </div>
+      <div class="actions">
+        <button id="openModalBtn" class="icon-btn" title="Загрузка" aria-label="Загрузка">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <path d="M12 3v12" stroke-width="2" stroke-linecap="round"/>
+            <path d="M7 10l5 5 5-5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M4 21h16" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- модальное окно ввода -->
+    <div id="inputModal" class="modal" aria-hidden="true" role="dialog" aria-modal="true" style="display:none">
+      <div class="backdrop" data-close></div>
+      <div class="dialog" role="document">
+        <header>
+          <h3>Ввод данных о компаниях</h3>
+          <button class="close" id="closeModalBtn" aria-label="Закрыть">
+            <span class="ic">✕</span>
+          </button>
+        </header>
+        <textarea id="textInput" placeholder="Вставьте сюда текст с компаниями в формате:
+
+Компания: Название компании
+Инсайты:
+- Первый инсайт
+- Второй инсайт
+- Третий инсайт
+
+Компания: Другая компания
+Инсайты:
+- Еще один инсайт
+- И так далее..."></textarea>
+        <div class="buttons">
+          <button class="btn primary" id="processTextBtn">Обработать текст</button>
+          <button class="btn" id="loadSampleBtn">Загрузить пример</button>
+          <button class="btn" id="clearDataBtn">Очистить данные</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="search">
+      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="11" cy="11" r="7" stroke-width="2"/><path d="M20 20l-3.5-3.5" stroke-width="2" stroke-linecap="round"/></svg>
+      <input id="q" type="search" placeholder="Поиск компании…" autocomplete="off" spellcheck="false" />
+      <span id="clear" class="clear" title="Очистить">✕</span>
+    </div>
+
+    <div class="progress">
+      <div class="bar"><div class="fill" id="fill"></div></div>
+      <div class="count" id="count">0 / 0</div>
+    </div>
+
+    <section id="list" class="list"></section>
+    <section id="empty" class="empty" style="display:none">Нет данных для отображения.</section>
+  </main>
+
+  <footer class="fab">
+    <button class="btn fab install" id="installBtn" style="display:none">Установить как приложение</button>
+  </footer>
+
+  <div id="toast" class="toast" role="status" aria-live="polite">Статус сохранён</div>
+  <canvas id="fx"></canvas>
+
+  <script src="script.js"></script>
+</body>
+</html>

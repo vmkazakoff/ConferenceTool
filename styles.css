@@ -1,0 +1,195 @@
+:root{
+  --mts-red:#E30611;
+  --bg:#0b0b0b;
+  --card:#111214;
+  --muted:#7d8790;
+  --text:#f6f7f9;
+  --border:#24272b;
+  --accent:#ff3b30;
+  --hot:#DFF6E6;    /* светло-зелёный фон */
+  --warm:#FFF6CC;   /* светло-жёлтый фон */
+  --cold:#EFEFEF;   /* светло-серый фон */
+  --hotText:#0b0b0b;
+  --warmText:#0b0b0b;
+  --coldText:#0b0b0b;
+  --radius:16px;
+  --shadow:0 10px 30px rgba(0,0,0,.35);
+}
+@media (prefers-color-scheme: light){
+  :root{
+    --bg:#f6f7f9;
+    --card:#ffffff;
+    --text:#101114;
+    --muted:#5b636b;
+    --border:#e8eaee;
+    --shadow:0 10px 24px rgba(16,17,20,.08);
+  }
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font:16px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Inter,"Noto Sans",Ubuntu,"Helvetica Neue",Arial,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol",sans-serif;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+}
+header.appbar{
+  position:static; z-index:20;
+  background:linear-gradient(180deg, rgba(227,6,17,0.95), rgba(227,6,17,0.90));
+  color:#fff; padding: env(safe-area-inset-top) 16px 12px;
+  backdrop-filter:saturate(140%) blur(8px);
+  box-shadow:0 6px 18px rgba(227,6,17,.28);
+}
+.appbar .row{display:flex; align-items:center; gap:12px; justify-content:space-between}
+.logo{
+  width:36px; height:36px; border-radius:10px; background:#fff;
+  display:grid; place-items:center; color:var(--mts-red); font-size:20px; font-weight:700;
+  box-shadow:0 6px 14px rgba(0,0,0,.25) inset, 0 1px 2px rgba(0,0,0,.2);
+}
+h1{margin:0; font-size:18px; font-weight:800; letter-spacing:.2px}
+.subtitle{font-size:12px; opacity:.9; margin-top:2px}
+main{padding:16px; padding-bottom: calc(24px + env(safe-area-inset-bottom))}
+
+/* Кнопка загрузки в шапке */
+.appbar .actions{display:flex; align-items:center}
+.icon-btn{
+  appearance:none; border:0; background:rgba(255,255,255,.12); color:#fff;
+  width:40px; height:40px; border-radius:12px; display:grid; place-items:center; cursor:pointer;
+  box-shadow:0 6px 18px rgba(0,0,0,.2);
+}
+.icon-btn:active{transform:translateY(1px)}
+.icon-btn svg{width:20px; height:20px}
+
+/* Модалка ввода текста */
+.modal{position:fixed; inset:0; display:none; z-index:60}
+.modal.open{display:block}
+.modal .backdrop{position:absolute; inset:0; background:rgba(0,0,0,.5); backdrop-filter:blur(2px)}
+.modal .dialog{
+  position:relative; z-index:1; max-width:720px; margin:10vh auto; background:var(--card);
+  border:1px solid var(--border); border-radius:16px; box-shadow:var(--shadow); padding:16px;
+}
+.modal .dialog header{display:flex; align-items:center; justify-content:space-between; gap:8px; margin-bottom:10px}
+.modal .dialog h3{margin:0; font-size:16px; font-weight:800}
+.modal .dialog .close{appearance:none; border:0; background:transparent; color:var(--muted); cursor:pointer}
+.modal .dialog .close .ic{opacity:.9}
+.modal .dialog textarea{
+  width:100%; min-height:40vh; max-height:60vh; padding:12px; border:1px solid var(--border); border-radius:10px;
+  background:var(--bg); color:var(--text); font:14px/1.45 inherit; resize:vertical; outline:none;
+}
+.modal .dialog textarea:focus{border-color:var(--mts-red)}
+.modal .dialog .buttons{display:flex; gap:8px; flex-wrap:wrap; margin-top:12px}
+.modal .dialog .btn{appearance:none; border:1px solid var(--border); background:var(--card); color:var(--text); padding:10px 12px; border-radius:10px; font-weight:700; cursor:pointer}
+.modal .dialog .btn.primary{background:var(--mts-red); color:#fff; border-color:var(--mts-red)}
+
+.toolbar{display:flex; gap:10px; flex-wrap:wrap; margin-bottom:12px} /* оставлено для совместимости, но не используется */
+.btn{
+  appearance:none; border:1px solid var(--border); background:var(--card); color:var(--text);
+  padding:10px 14px; border-radius:12px; font-weight:600; cursor:pointer;
+  box-shadow:var(--shadow); transition:.2s transform, .2s box-shadow, .25s background;
+}
+.btn:active{transform:translateY(1px); box-shadow:0 4px 10px rgba(0,0,0,.18)}
+.btn.primary{background:#fff; color:#111; border:0}
+.btn.red{background:var(--mts-red); color:#fff; border:0}
+.btn.ghost{background:transparent; border:1px dashed var(--border); box-shadow:none}
+
+.search{
+  position:relative; margin:10px 0 18px;
+}
+.search input{
+  width:100%; padding:14px 44px 14px 44px; border-radius:14px; border:1px solid var(--border);
+  background:var(--card); color:var(--text); outline:none; box-shadow:var(--shadow);
+  font-weight:600; letter-spacing:.2px;
+}
+.search .icon{
+  position:absolute; width:22px; height:22px; left:12px; top:50%; transform:translateY(-50%); opacity:.6
+}
+.search .clear{
+  position:absolute; right:10px; top:50%; transform:translateY(-50%); opacity:.6; cursor:pointer; user-select:none
+}
+
+.progress{
+  display:flex; align-items:center; gap:10px; margin:6px 0 14px;
+}
+.bar{
+  position:relative; flex:1; height:10px; border-radius:999px; background:var(--border); overflow:hidden;
+  box-shadow:inset 0 2px 5px rgba(0,0,0,.08);
+}
+.bar .fill{
+  position:absolute; inset:0 100% 0 0; background:linear-gradient(90deg, #FFE1E3, #FF9BA1, #E30611);
+  border-radius:999px; transition:width .35s ease;
+  width:0%;
+}
+.count{font-weight:800; font-size:13px; color:var(--muted)}
+
+.list{display:flex; flex-direction:column; gap:12px; margin-bottom:80px}
+.item{
+  background:var(--card); border:1px solid var(--border); border-radius:16px; overflow:hidden;
+  box-shadow:var(--shadow); transition: .2s transform, .2s box-shadow;
+}
+.item:active{transform:translateY(1px); box-shadow:0 6px 16px rgba(0,0,0,.18)}
+.item-header{
+  display:grid; grid-template-columns: 1fr auto; align-items:center; gap:8px; padding:14px;
+}
+.name{font-weight:800; font-size:16px; letter-spacing:.2px}
+.tag{
+  font-size:12px; font-weight:800; padding:6px 10px; border-radius:999px; border:1px solid var(--border);
+  color:var(--muted); background:transparent; white-space:nowrap;
+}
+.tag.hot{background:var(--hot); color:var(--hotText); border-color:rgba(0,0,0,.06)}
+.tag.warm{background:var(--warm); color:var(--warmText); border-color:rgba(0,0,0,.06)}
+.tag.cold{background:var(--cold); color:var(--coldText); border-color:rgba(0,0,0,.06)}
+
+.chev{transform:rotate(0deg); transition:.25s transform; opacity:.55}
+.item.open .chev{transform:rotate(180deg)}
+.details{
+  border-top:1px dashed var(--border);
+  max-height:0; overflow:hidden; transition:max-height .35s ease;
+  background:linear-gradient(180deg, rgba(255,255,255,.02), transparent);
+}
+.item.open .details{padding:4px 14px 12px}
+ul.insights{margin:12px 0 6px 18px; padding:0}
+ul.insights li{margin:6px 0; line-height:1.35}
+.status-controls{
+  display:flex; gap:8px; flex-wrap:wrap; margin-top:8px;
+}
+.chip{
+  padding:8px 12px; border-radius:999px; border:1px solid var(--border);
+  background:#fff; color:#111; font-weight:700; cursor:pointer; user-select:none;
+  box-shadow:var(--shadow); transition:.2s transform, .2s box-shadow;
+}
+.chip:active{transform:translateY(1px); box-shadow:0 6px 16px rgba(0,0,0,.18)}
+.chip.hot{background:var(--hot); color:var(--hotText)}
+.chip.warm{background:var(--warm); color:var(--warmText)}
+.chip.cold{background:var(--cold); color:var(--coldText)}
+.chip.reset{background:var(--card); color:var(--muted)}
+
+.color-hot{background:var(--hot) !important; color:var(--hotText)}
+.color-warm{background:var(--warm) !important; color:var(--warmText)}
+.color-cold{background:var(--cold) !important; color:var(--coldText)}
+
+.toast{
+  position:fixed; left:50%; bottom: calc(18px + env(safe-area-inset-bottom));
+  transform:translateX(-50%) translateY(20px); opacity:0; transition:.25s;
+  background:#111; color:#fff; border:1px solid #222; border-radius:12px; padding:10px 14px; z-index:50;
+  box-shadow:0 12px 28px rgba(0,0,0,.35);
+}
+.toast.show{opacity:1; transform:translateX(-50%) translateY(0)}
+footer.fab{
+  position:fixed; right:16px; bottom: calc(16px + env(safe-area-inset-bottom)); z-index:30;
+  display:flex; gap:10px; flex-direction:column; align-items:flex-end;
+}
+.fab .install{
+  background:var(--mts-red); color:#fff; border:0; padding:14px 16px; border-radius:999px; font-weight:800;
+  box-shadow:0 14px 36px rgba(227,6,17,.45);
+}
+
+/* Полноэкранный холст конфетти */
+canvas#fx{position:fixed; inset:0; width:100%; height:100%; pointer-events:none; z-index:40}
+
+.empty{
+  border:1px dashed var(--border); border-radius:18px; padding:20px; text-align:center; color:var(--muted);
+  background:repeating-linear-gradient(45deg, transparent, transparent 12px, rgba(0,0,0,.03) 12px, rgba(0,0,0,.03) 24px);
+}
+
+.ic{width:18px;height:18px;vertical-align:-3px;opacity:.7}
