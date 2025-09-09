@@ -37,7 +37,8 @@ body{
 header.appbar{
   position:static; z-index:20;
   background:linear-gradient(180deg, rgba(227,6,17,0.95), rgba(227,6,17,0.90));
-  color:#fff; padding: env(safe-area-inset-top) 16px 12px;
+  color:#fff; 
+  padding: 10px;
   backdrop-filter:saturate(140%) blur(8px);
   box-shadow:0 6px 18px rgba(227,6,17,.28);
 }
